@@ -49,9 +49,11 @@
 
             @include('partials.header')
 
-            @yield('container')
+            @yield('hero')
+            <!-- Navbar & Hero End -->
         </div>
-        <!-- Navbar & Hero End -->
+
+        @yield('container');
 
         @include('partials.footer')
 
