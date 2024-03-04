@@ -23,19 +23,17 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'name' => 'Khairul Aqram',
-            'username' => 'khairulaqram',
-            'email' => 'khairulaqram21@gmail.com',
+            'name' => 'Mirna Maulidia',
+            'username' => 'mirnamaulidia',
+            'email' => 'mirnamaulidia@gmail.com',
             'password' => bcrypt('12345')
         ]);
 
         Monitoring::create([
-            'temperature' => 28.8,
-            'turbidity' => 90,
-            'ph' => 7.9,
-            'dissolved_oxygen' => 6.8,
-            'water_pump' => 'Mati',
-            'aerator' => 'Mati',
+            'suhu' => 28.8,
+            'kelembapan' => 90,
+            'kipas' => "Mati",
+            'humidifier' => "Mati",
         ]);
     }
 }
