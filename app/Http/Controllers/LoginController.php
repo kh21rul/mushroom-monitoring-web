@@ -9,7 +9,9 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.index', [
+        return view(
+            'login.index',
+            [
                 'title' => 'Login',
             ]
         );
@@ -18,7 +20,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'username' => ['required', 'alpha_dash', 'max:255'],
+            'email' => ['required'],
             'password' => ['required'],
         ]);
 
@@ -28,7 +30,7 @@ class LoginController extends Controller
             return redirect()->intended('/dashboard');
         }
 
-        return back()->with('loginError', 'username atau password salah.');
+        return back()->with('loginError', 'email atau password salah.');
     }
 
     public function logout(Request $request)

@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
-    Route::post('/login', 'authenticate');
+    Route::post('/login', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('logout');
 });
 

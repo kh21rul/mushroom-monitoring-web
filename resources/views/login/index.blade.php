@@ -1,169 +1,128 @@
+@php
+    $title = 'Login';
+@endphp
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="light-style customizer-hide"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="{{ asset('dashmin/assets/') }}"
-  data-template="vertical-menu-template-free"
->
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+<html lang="en">
 
-    <title>Vanamei Monitoring | {{ $title }}</title>
-
-    <meta name="description" content="" />
-
-    <link rel="manifest" href="manifest.json" />
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>MonJaTir | {{ $title }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/iconWeb.png') }}" />
+    <link href="{{ asset('landpages/img/favicon.png') }}" rel="icon">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/fontawesome/css/all.min.css') }}">
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/fonts/boxicons.css') }}" />
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/bootstrap-social/bootstrap-social.css') }}">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/css/demo.css') }}" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
-
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/pages/page-auth.css') }}" />
-    <!-- Helpers -->
-    <script src="{{ asset('dashmin/assets/vendor/js/helpers.js') }}"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('dashmin/assets/js/config.js') }}"></script>
-  </head>
-
-  <body>
-    <!-- Content -->
-
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-           @if (session()->has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session()->has('loginError'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('loginError') }}
-                </div>
-            @endif
-          <!-- Login -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
-                    <img src="{{ asset('img/iconWeb.png') }}" style="width: 40px">
-                  </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Vanamei</span>
-                </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Selamat datang! 👋</h4>
-              <p class="mb-4">Silakan masuk ke akun Anda dan mulai memonitoring</p>
-
-              <form class="mb-3" action="/login" method="post">
-                @csrf
-                <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control @error('username') is-invalid @enderror"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username"
-                    autofocus
-                    required
-                    value="{{ old('username') }}"
-                  />
-                  @error('username')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                  @enderror
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control @error('password') is-invalid @enderror"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                      required
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                  @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                  @enderror
-                </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- /Login -->
-        </div>
-      </div>
-    </div>
-    <!-- / Content -->
-
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('dashmin/assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-
-    <script src="{{ asset('dashmin/assets/vendor/js/menu.js') }}"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-    <script src="{{ asset('dashmin/assets/js/main.js') }}"></script>
-
-    <!-- Page JS -->
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('dashmin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/css/components.css') }}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{{ asset('serviceworker.js') }}");
-      }
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
     </script>
-  </body>
+    <!-- /END GA -->
+</head>
+
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div
+                        class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="login-brand">
+                            <img src="{{ asset('dashmin/img/stisla-fill.svg') }}" alt="logo" width="100"
+                                class="shadow-light rounded-circle">
+                        </div>
+
+                        @if (session()->has('loginError'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('loginError') }}
+                            </div>
+                        @endif
+
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h4>Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('authenticate') }}" class="needs-validation"
+                                    novalidate="">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            tabindex="1" required autofocus value="{{ old('email') }}">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                        <div class="invalid-feedback">
+                                            Please fill in your email
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="d-block">
+                                            <label for="password" class="control-label">Password</label>
+                                        </div>
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            tabindex="2" required>
+                                        <div class="invalid-feedback">
+                                            please fill in your password
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                            Login
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="simple-footer">
+                            Copyright &copy; MonJaTir 2024
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- General JS Scripts -->
+    <script src="{{ asset('dashmin/modules/jquery.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/popper.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/tooltip.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/moment.min.js') }}"></script>
+    <script src="{{ asset('dashmin/js/stisla.js') }}"></script>
+
+    <!-- JS Libraies -->
+
+    <!-- Page Specific JS File -->
+
+    <!-- Template JS File -->
+    <script src="{{ asset('dashmin/js/scripts.js') }}"></script>
+    <script src="{{ asset('dashmin/js/custom.js') }}"></script>
+</body>
+
 </html>
