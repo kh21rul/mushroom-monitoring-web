@@ -53,7 +53,7 @@
             <!-- Navbar & Hero End -->
         </div>
 
-        @yield('container');
+        @yield('container')
 
         @include('partials.footer')
 

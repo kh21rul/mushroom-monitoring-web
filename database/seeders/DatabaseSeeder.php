@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
             'kipas' => "Mati",
             'humidifier' => "Mati",
         ]);
+
+        \App\Models\Control::factory(10)->create();
     }
 }

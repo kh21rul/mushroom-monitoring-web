@@ -1,5 +1,5 @@
 <?php
 foreach ($monitoring as $data) {
-    echo $data->suhu;
+    echo $data->kipas;
 }
 ?>

@@ -70,44 +70,31 @@ class MonitoringController extends Controller
         return view('bacasuhu', ['monitoring' => $monitoring]);
     }
 
-    public function bacakekeruhan()
+    public function bacakelembapan()
     {
         $monitoring = Monitoring::select('*')->get();
-        return view('bacakekeruhan', ['monitoring' => $monitoring]);
+        return view('bacakelembapan', ['monitoring' => $monitoring]);
     }
 
-    public function bacaph()
+    public function bacakipas()
     {
         $monitoring = Monitoring::select('*')->get();
-        return view('bacaph', ['monitoring' => $monitoring]);
+        return view('bacakipas', ['monitoring' => $monitoring]);
     }
 
-    public function bacado()
+    public function bacahumidifier()
     {
         $monitoring = Monitoring::select('*')->get();
-        return view('bacado', ['monitoring' => $monitoring]);
+        return view('bacahumidifier', ['monitoring' => $monitoring]);
     }
 
-    public function bacawaterpump()
+    public function simpan()
     {
-        $monitoring = Monitoring::select('*')->get();
-        return view('bacawaterpump', ['monitoring' => $monitoring]);
-    }
-
-    public function bacaaerator()
-    {
-        $monitoring = Monitoring::select('*')->get();
-        return view('bacaaerator', ['monitoring' => $monitoring]);
-    }
-
-    public function simpan () {
-        Monitoring::where ('id', 1)->update ([
-            'temperature' => request ('temperature'),
-            'turbidity' => request ('turbidity'),
-            'ph' => request ('ph'),
-            'dissolved_oxygen' => request ('dissolved_oxygen'),
-            'water_pump' => request ('water_pump'),
-            'aerator' => request ('aerator'),
+        Monitoring::where('id', 1)->update([
+            'suhu' => request('suhu'),
+            'kelembapan' => request('kelembapan'),
+            'kipas' => request('kipas'),
+            'humidifier' => request('aerator'),
         ]);
     }
 }

@@ -17,7 +17,10 @@ class ControlFactory extends Factory
     public function definition(): array
     {
         return [
-            // 
+            'suhu' => 28.8,
+            'kelembapan' => 90,
+            'kipas' => "Mati",
+            'humidifier' => "Mati",
         ];
     }
 }

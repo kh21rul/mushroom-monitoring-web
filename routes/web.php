@@ -31,11 +31,9 @@ Route::resource('/dashboard/controls', DashboardHistoryController::class)->middl
 Route::get('/dashboard/cetak', [DashboardHistoryController::class, 'cetak'])->middleware('auth');
 
 Route::get('/bacasuhu', [MonitoringController::class, 'bacasuhu'])->middleware('auth');
-Route::get('/bacakekeruhan', [MonitoringController::class, 'bacakekeruhan'])->middleware('auth');
-Route::get('/bacaph', [MonitoringController::class, 'bacaph'])->middleware('auth');
-Route::get('/bacado', [MonitoringController::class, 'bacado'])->middleware('auth');
-Route::get('/bacawaterpump', [MonitoringController::class, 'bacawaterpump'])->middleware('auth');
-Route::get('/bacaaerator', [MonitoringController::class, 'bacaaerator'])->middleware('auth');
+Route::get('/bacakelembapan', [MonitoringController::class, 'bacakelembapan'])->middleware('auth');
+Route::get('/bacakipas', [MonitoringController::class, 'bacakipas'])->middleware('auth');
+Route::get('/bacahumidifier', [MonitoringController::class, 'bacahumidifier'])->middleware('auth');
 
 // Route untuk menyimpan nilai sensor ke database
-Route::get('/simpan/{temperature}/{turbidity}/{ph}/{dissolved_oxygen}/{water_pump}/{aerator}', [MonitoringController::class, 'simpan']);
+Route::get('/simpan/{suhu}/{humidifier}/{kipas}/{humidifier}', [MonitoringController::class, 'simpan']);

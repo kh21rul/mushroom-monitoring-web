@@ -67,7 +67,7 @@
                                         <label for="email">Email</label>
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            tabindex="1" required autofocus value="{{ old('email') }}">
+                                            tabindex="1" required autofocus>
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -85,6 +85,11 @@
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             tabindex="2" required>
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                         <div class="invalid-feedback">
                                             please fill in your password
                                         </div>

@@ -1,116 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-    data-assets-path="{{ asset('dashmin/assets/') }}" data-template="vertical-menu-template-free">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
-
-    <title>Vanamei Monitoring | {{ $title }}</title>
-
-    <meta name="description" content="" />
-
-    <link rel="manifest" href="manifest.json" />
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>MonJaTir | {{ $title }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/iconWeb.png') }}" />
+    <link href="{{ asset('landpages/img/favicon.png') }}" rel="icon">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/fontawesome/css/all.min.css') }}">
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/fonts/boxicons.css') }}" />
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/jqvmap/dist/jqvmap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/weather-icon/css/weather-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/weather-icon/css/weather-icons-wind.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('dashmin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/core.css') }}"
-        class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/theme-default.css') }}"
-        class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/css/demo.css') }}" />
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('dashmin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/css/components.css') }}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="{{ asset('dashmin/assets/vendor/js/helpers.js') }}"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('dashmin/assets/vendor/js/helpers.js/assets/js/config.js') }}"></script>
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
 </head>
 
 <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
 
-            {{-- sidebar --}}
+            @include('dashboard.layouts.header')
+
             @include('dashboard.layouts.sidebar')
 
-            <!-- Layout container -->
-            <div class="layout-page">
+            @yield('container')
 
-                {{-- header --}}
-                @include('dashboard.layouts.header')
+            @include('dashboard.layouts.footer')
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    {{-- Content --}}
-                    @yield('container')
-
-                    {{-- footer --}}
-                    @include('dashboard.layouts.footer')
-
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
         </div>
-
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- / Layout wrapper -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('dashmin/assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <!-- General JS Scripts -->
+    <script src="{{ asset('dashmin/modules/jquery.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/popper.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/tooltip.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/moment.min.js') }}"></script>
+    <script src="{{ asset('dashmin/js/stisla.js') }}"></script>
 
-    <script src="{{ asset('dashmin/assets/vendor/js/menu.js') }}"></script>
-    <!-- endbuild -->
+    <!-- JS Libraies -->
+    <script src="{{ asset('dashmin/modules/simple-weather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/chart.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/summernote/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/jquery-ui/jquery-ui.min.js') }}"></script>
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('dashmin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('dashmin/js/page/index-0.js') }}"></script>
+    <script src="{{ asset('dashmin/js/page/modules-datatables.js') }}"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('dashmin/assets/js/main.js') }}"></script>
 
-    <!-- Page JS -->
-    <script src="{{ asset('dashmin/assets/js/dashboards-analytics.js') }}"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register("{{ asset('serviceworker.js') }}");
-        }
-    </script>
+    <!-- Template JS File -->
+    <script src="{{ asset('dashmin/js/scripts.js') }}"></script>
+    <script src="{{ asset('dashmin/js/custom.js') }}"></script>
 </body>
 
 </html>
