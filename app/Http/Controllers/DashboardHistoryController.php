@@ -16,7 +16,7 @@ class DashboardHistoryController extends Controller
 
         $controls = Control::latest();
 
-        if(request('filter')) {
+        if (request('filter')) {
             $controls->where('created_at', 'like', '%' . request('filter') . '%');
         } else {
             $controls->where('created_at', 'like', '%' . Carbon::now()->format('Y-m-d') . '%');
@@ -33,7 +33,7 @@ class DashboardHistoryController extends Controller
     {
         $controls = Control::latest();
 
-        if(request('filter')) {
+        if (request('filter')) {
             $controls->where('created_at', 'like', '%' . request('filter') . '%');
         } else {
             $controls->where('created_at', 'like', '%' . Carbon::now()->format('Y-m-d') . '%');

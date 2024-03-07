@@ -80,7 +80,7 @@
                                 <table class="table table-striped text-center">
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Pukul</th>
                                             <th>Suhu</th>

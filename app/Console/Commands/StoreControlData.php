@@ -36,12 +36,10 @@ class StoreControlData extends Command
 
         if ($monitoringData) {
             $controlData = [
-                'temperature' => $monitoringData->temperature,
-                'turbidity' => $monitoringData->turbidity,
-                'ph' => $monitoringData->ph,
-                'dissolved_oxygen' => $monitoringData->dissolved_oxygen,
-                'water_pump' => $monitoringData->water_pump,
-                'aerator' => $monitoringData->aerator,
+                'suhu' => $monitoringData->suhu,
+                'kelembapan' => $monitoringData->kelembapan,
+                'kipas' => $monitoringData->kipas,
+                'humidifier' => $monitoringData->humidifier,
             ];
 
             Control::create($controlData);

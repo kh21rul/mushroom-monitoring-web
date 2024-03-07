@@ -1,116 +1,123 @@
 <!DOCTYPE html>
-<html lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="{{ asset('dashmin/assets/') }}"
-    data-template="vertical-menu-template-free">
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/iconWeb.png') }}" />
+<html lang="en">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/fonts/boxicons.css') }}" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/css/demo.css') }}" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
-
-    <link rel="stylesheet" href="{{ ('dashmin/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="{{ asset('dashmin/assets/vendor/js/helpers.js') }}"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{ asset('dashmin/assets/vendor/js/helpers.js/assets/js/config.js') }}"></script>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
-    <meta name="csrf-token" content=" {{ csrf_token() }} ">
-    <title>Data Monitoring | {{ request('filter') ? request('filter') : now()->format('Y-m-d') }}</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>MonJaTir | {{ $title }}</title>
+
+    <!-- Favicon -->
+    <link href="{{ asset('landpages/img/favicon.png') }}" rel="icon">
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/modules/fontawesome/css/all.min.css') }}">
+
+    <!-- CSS Libraries -->
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('dashmin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashmin/css/components.css') }}">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
 </head>
+
 <body>
-    <div class="container-xl flex-grow-1 container-p-y">
-    <!-- Basic Bootstrap Table -->
-        <div class="card mb-2">
-        <h5 class="card-header">Rekap Data Monitoring {{ request('filter') ?: $today }}</h5>
-        <div class="table-responsive text-nowrap">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Pukul</th>
-                    <th>Suhu</th>
-                    <th>Keruh</th>
-                    <th>pH</th>
-                    <th>Oksigen</th>
-                    <th>Pompa Air</th>
-                    <th>Aerator</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                @if ($controls->count() == 0)
-                    <tr>
-                        <td colspan="10" class="text-center">Belum ada data</td>
-                    </tr>
-                @endif
-                @foreach ($controls as $control)
-                <tr>
-                    <td><strong>{{ $control->created_at->format('H:i') }}</strong></td>
-                    <td>{{ $control->temperature }}</td>
-                    <td>{{ $control->turbidity }}</td>
-                    <td>{{ $control->ph }}</td>
-                    <td>{{ $control->dissolved_oxygen }}</td>
-                    <td><span class="badge me-1 {{ $control->water_pump == 'Hidup' ? 'bg-label-danger' : 'bg-label-success' }}">{{ $control->water_pump }}</span></td>
-                    <td><span class="badge me-1 {{ $control->aerator == 'Hidup' ? 'bg-label-danger' : 'bg-label-success' }}">{{ $control->aerator }}</span></td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <!-- Main Content -->
+            <div class="main-content">
+                <section class="section">
+                    <div class="section-body">
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="section-title">Rekap Data Monitoring
+                                            {{ request('filter') ?: $today }}</div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Pukul</th>
+                                                        <th>Suhu</th>
+                                                        <th>Kelembapan</th>
+                                                        <th>Kipas</th>
+                                                        <th>Humidifier</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if ($controls->count() == 0)
+                                                        <tr>
+                                                            <td colspan="10" class="text-center">Belum ada data</td>
+                                                        </tr>
+                                                    @endif
+                                                    @foreach ($controls as $control)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $control->created_at->format('d-m-Y') }}</td>
+                                                            <td>{{ $control->created_at->format('H:i') }}</td>
+                                                            <td>{{ $control->suhu }}</td>
+                                                            <td>{{ $control->kelembapan }}</td>
+                                                            <td>
+                                                                <div
+                                                                    class="badge {{ $control->kipas == 'Hidup' ? 'badge-danger' : 'badge-success' }}">
+                                                                    {{ $control->kipas }}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div
+                                                                    class="badge {{ $control->humidifier == 'Hidup' ? 'badge-danger' : 'badge-success' }}">
+                                                                    {{ $control->humidifier }}</div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-        </div>
-    <!--/ Basic Bootstrap Table -->
     </div>
 
     {{-- perintah print --}}
     <script>
         window.print();
     </script>
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('dashmin/assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('dashmin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-    <script src="{{ asset('dashmin/assets/vendor/js/menu.js') }}"></script>
-    <!-- endbuild -->
+    <!-- General JS Scripts -->
+    <script src="{{ asset('dashmin/modules/jquery.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/popper.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/tooltip.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('dashmin/modules/moment.min.js') }}"></script>
+    <script src="{{ asset('dashmin/js/stisla.js') }}"></script>
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('dashmin/assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <!-- JS Libraies -->
 
-    <!-- Main JS -->
-    <script src="{{ asset('dashmin/assets/js/main.js') }}"></script>
+    <!-- Page Specific JS File -->
 
-    <!-- Page JS -->
-    <script src="{{ asset('dashmin/assets/js/dashboards-analytics.js') }}"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Template JS File -->
+    <script src="{{ asset('dashmin/js/scripts.js') }}"></script>
+    <script src="{{ asset('dashmin/js/custom.js') }}"></script>
 </body>
+
 </html>

@@ -1,95 +1,109 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-    <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">dashboard /</span> controls</h4>
-    @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-            ></button>
-        </div>
-    @endif
-    <!-- Basic Bootstrap Table -->
-        <div class="card mb-2">
-        <h5 class="card-header">Rekap Data Monitoring Perhari</h5>
-        <div class="card-body col-md-5 mb-2">
-            <form action="/dashboard/controls">
-                @csrf
-                <div class="input-group">
-                    <input
-                        name="filter"
-                        type="date"
-                        class="form-control"
-                        value="{{ request('filter') ?: $today }}"
-                    />
-                    <button class="btn btn-outline-primary" type="submit"><i class="bx bx-search"></i> Filter</button>
-                    </form>
-                    <a class="btn btn-outline-secondary" target="_blank" href="/dashboard/cetak{{ request()->has('filter') ? '?filter=' . request('filter') : '' }}"><i class="bx bx-printer"></i> Cetak</a>
+    <!-- Main Content -->
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Rekap Monitoring</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
+                    <div class="breadcrumb-item">Rekap Monitoring</div>
                 </div>
-        </div>
-        <div class="table-responsive text-nowrap">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Pukul</th>
-                    <th>Suhu</th>
-                    <th>Keruh</th>
-                    <th>pH</th>
-                    <th>Oksigen</th>
-                    <th>Pompa Air</th>
-                    <th>Aerator</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                @php
-                    $no = 1;
-                @endphp
-                <tbody class="table-border-bottom-0">
-                @if ($controls->count() == 0)
-                    <tr>
-                        <td colspan="10" class="text-center">Belum ada data</td>
-                    </tr>
-                @endif
-                @foreach ($controls as $control)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $control->created_at->format('d M Y') }}</td>
-                    <td><strong>{{ $control->created_at->format('H:i') }}</strong></td>
-                    <td>{{ $control->temperature }}</td>
-                    <td>{{ $control->turbidity }}</td>
-                    <td>{{ $control->ph }}</td>
-                    <td>{{ $control->dissolved_oxygen }}</td>
-                    <td><span class="badge me-1 {{ $control->water_pump == 'Hidup' ? 'bg-label-danger' : 'bg-label-success' }}">{{ $control->water_pump }}</span></td>
-                    <td><span class="badge me-1 {{ $control->aerator == 'Hidup' ? 'bg-label-danger' : 'bg-label-success' }}">{{ $control->aerator }}</span></td>
-                    <td>
-                    <div class="dropdown">
-                        <a href="#" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <form action="/dashboard/controls/{{ $control->id }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="dropdown-item">
-                                    <i class="bx bx-trash me-1"></i> Delete
-                                </button>
-                            </form>
+            </div>
+
+            <div class="section-body">
+                <h2 class="section-title">Data Rekapitulasi Monitoring Jamur Tiram</h2>
+                <p class="section-lead">
+                    Berikut data rekapitulasi monitoring jamur tiram yang di update 1 jam sekali.
+                </p>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <form class="form-inline ml-auto" action="{{ route('dashboard.controls.index') }}">
+                                        <!-- Input Pencarian -->
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input type="date" class="form-control" name="filter"
+                                                value="{{ request('filter') ?: $today }}">
+                                        </div>
+                                        <!-- Tombol Cari -->
+                                        <button type="submit" class="btn btn-primary mb-2 mr-2"><i
+                                                class="fas fa-search"></i> Filters</button>
+                                        <!-- Tombol Cetak -->
+                                        <a class="btn btn-success mb-2" target="_blank"
+                                            href="/dashboard/cetak{{ request()->has('filter') ? '?filter=' . request('filter') : '' }}"><i
+                                                class="fas fa-print"></i> Cetak</a>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal</th>
+                                                <th>Pukul</th>
+                                                <th>Suhu</th>
+                                                <th>Kelembapan</th>
+                                                <th>Kipas</th>
+                                                <th>Humidifier</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($controls as $control)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $control->created_at->format('d-m-Y') }}</td>
+                                                    <td>{{ $control->created_at->format('H:i') }}</td>
+                                                    <td>{{ $control->suhu }}</td>
+                                                    <td>{{ $control->kelembapan }}</td>
+                                                    <td>
+                                                        <div
+                                                            class="badge {{ $control->kipas == 'Hidup' ? 'badge-danger' : 'badge-success' }}">
+                                                            {{ $control->kipas }}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div
+                                                            class="badge {{ $control->humidifier == 'Hidup' ? 'badge-danger' : 'badge-success' }}">
+                                                            {{ $control->humidifier }}</div>
+                                                    </td>
+                                                    <td>
+                                                        <form id="delete"
+                                                            action="{{ route('dashboard.controls.destroy', $control->id) }}"
+                                                            method="POST">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger btn-action" data-toggle="tooltip"
+                                                                title="Delete"
+                                                                data-confirm="Apakah Kamu Yakin?|This action can not be undone. Do you want to continue?"
+                                                                data-confirm-yes="deleteButton()"><i
+                                                                    class="fas fa-trash"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </td>
-                </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-        </div>
-    <!--/ Basic Bootstrap Table -->
+                </div>
+            </div>
+        </section>
     </div>
+
+    {{-- Penggunaan funtion tombol delete --}}
+    <script>
+        function deleteButton() {
+            event.preventDefault();
+            const form = document.getElementById("delete");
+            form.submit();
+        }
+    </script>
 @endsection

@@ -27,7 +27,10 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
-Route::resource('/dashboard/controls', DashboardHistoryController::class)->middleware('auth');
+Route::resource('/dashboard/controls', DashboardHistoryController::class)->middleware('auth')->except('create', 'store', 'show', 'edit', 'update')->names([
+    'index' => 'dashboard.controls.index',
+    'destroy' => 'dashboard.controls.destroy'
+]);
 Route::get('/dashboard/cetak', [DashboardHistoryController::class, 'cetak'])->middleware('auth');
 
 Route::get('/bacasuhu', [MonitoringController::class, 'bacasuhu'])->middleware('auth');
@@ -36,4 +39,4 @@ Route::get('/bacakipas', [MonitoringController::class, 'bacakipas'])->middleware
 Route::get('/bacahumidifier', [MonitoringController::class, 'bacahumidifier'])->middleware('auth');
 
 // Route untuk menyimpan nilai sensor ke database
-Route::get('/simpan/{suhu}/{humidifier}/{kipas}/{humidifier}', [MonitoringController::class, 'simpan']);
+Route::get('/simpan/{suhu}/{kelembapan}/{kipas}/{humidifier}', [MonitoringController::class, 'simpan']);

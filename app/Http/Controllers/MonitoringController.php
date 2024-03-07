@@ -94,7 +94,7 @@ class MonitoringController extends Controller
             'suhu' => request('suhu'),
             'kelembapan' => request('kelembapan'),
             'kipas' => request('kipas'),
-            'humidifier' => request('aerator'),
+            'humidifier' => request('humidifier'),
         ]);
     }
 }
