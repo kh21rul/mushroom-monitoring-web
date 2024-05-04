@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('monitorings', function (Blueprint $table) {
             $table->id();
             $table->decimal('suhu', 10, 2);
-            $table->decimal('kelembapan', 10, 2);
+            $table->integer('kelembapan');
             $table->string('kipas');
             $table->string('humidifier');
             $table->timestamps();

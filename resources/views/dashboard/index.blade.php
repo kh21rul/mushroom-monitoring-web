@@ -18,7 +18,7 @@
                                 <h4>Suhu</h4>
                             </div>
                             <div class="card-body">
-                                <span id="suhu">0</span>
+                                <span id="suhu">0</span> °C
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                                 <h4>Kelembapan</h4>
                             </div>
                             <div class="card-body">
-                                <span id="kelembapan">0</span>
+                                <span id="kelembapan">0</span> %
                             </div>
                         </div>
                     </div>
